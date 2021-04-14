@@ -29,6 +29,10 @@ ENV BUILD_PACKAGES="\
   build-base \
   linux-headers \
   python3-dev \
+  libopenblas-dev \
+  liblapack-dev \
+  libatlas-base-dev \
+  libblas-dev \
 "
 
 ## running
