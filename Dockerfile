@@ -66,6 +66,12 @@ RUN echo "Begin" \
   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
   && pip install --no-cache-dir pandas==1.2.3 ${speed} \
+  && pip install --no-cache-dir numpy==1.19.4 ${speed} \
+  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
+  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
+  && pip install --no-cache-dir joblib==1.0.0 ${speed} \
+  && pip install --no-cache-dir scipy==1.6.0 ${speed} \
+  && pip install --no-cache-dir scikit-learn==0.24.1 ${speed} \ 
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
