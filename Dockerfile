@@ -78,9 +78,9 @@ RUN echo "Begin" \
 #   && pip install --no-cache-dir joblib==1.0.0 ${speed} \
 #   && pip install --no-cache-dir scipy==1.6.0 ${speed} \
 #   && pip install --no-cache-dir matplotlib ${speed} \
-#   && pip install --no-cache-dir scikit-learn==0.24.1 ${speed} \ 
+  && pip install --no-cache-dir scikit-learn==0.24.1 ${speed} \ 
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
-&& pip install --no-cache-dir sklearn ${speed} \
+# && pip install --no-cache-dir sklearn ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
   && echo "End"
