@@ -29,6 +29,9 @@ ENV BUILD_PACKAGES="\
   build-base \
   linux-headers \
   python3-dev \
+  openblas \
+  lapack \
+  flame \
 "
 
 ## running
