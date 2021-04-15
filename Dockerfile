@@ -31,7 +31,6 @@ ENV BUILD_PACKAGES="\
   python3-dev \
   openblas \
   lapack \
-  flame \
 "
 
 ## running
