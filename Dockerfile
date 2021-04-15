@@ -30,7 +30,11 @@ ENV BUILD_PACKAGES="\
   linux-headers \
   python3-dev \
   openblas \
+  openblas-dev \
   lapack \
+  lapack-dev \
+  blas \
+  blas-dev \
 "
 
 ## running
