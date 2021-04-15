@@ -63,20 +63,21 @@ RUN echo "Begin" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
 ##  && mkdir /whl && cd /whl && pip wheel pandas ${speed} \
-  && pip install --no-cache-dir requests==2.25.1 ${speed} \
-  && pip install --no-cache-dir Django==3.1.2 ${speed} \
-  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
-  && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
-  && pip install --no-cache-dir celery[redis]==5.0.1 ${speed} \
-  && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
-  && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
-  && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
+#   && pip install --no-cache-dir requests==2.25.1 ${speed} \
+#   && pip install --no-cache-dir Django==3.1.2 ${speed} \
+#   && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
+#   && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
+#   && pip install --no-cache-dir celery[redis]==5.0.1 ${speed} \
+#   && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
+#   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
+#   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
+#   && pip install --no-cache-dir pandas==1.2.3 ${speed} \
   && pip install --no-cache-dir numpy==1.19.4 ${speed} \
-  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
-  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
-  && pip install --no-cache-dir joblib==1.0.0 ${speed} \
+#   && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
+#   && pip install --no-cache-dir jieba==0.42.1 ${speed} \
+#   && pip install --no-cache-dir joblib==1.0.0 ${speed} \
   && pip install --no-cache-dir scipy==1.6.0 ${speed} \
+  && pip install --no-cache-dir matplotlib ${speed} \
   && pip install --no-cache-dir scikit-learn==0.24.1 ${speed} \ 
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
