@@ -19,6 +19,10 @@ ENV PACKAGES="\
   dumb-init tzdata bash vim tini ncftp busybox-extras \
   python3 \
   mysql-dev \
+  openblas \
+  libgomp \
+  lapack \
+  blas \
 "
 
 # These packages are not installed immediately, but are added at runtime or ONBUILD to shrink the image as much as possible. Notes:
@@ -29,18 +33,15 @@ ENV BUILD_PACKAGES="\
   build-base \
   linux-headers \
   python3-dev \
-  openblas \
   openblas-dev \
-  lapack \
   lapack-dev \
-  blas \
   blas-dev \
 "
 
 ## running
 RUN echo "Begin" \
-#   && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
-#   && echo "${TIMEZONE}" > /etc/timezone \
+##  && echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts \
+  && echo "${TIMEZONE}" > /etc/timezone \
 ##  && GITHUB_URL='https://github.com/tianxiawuzhe/chgcheck_alpine312_py385_django312/raw/master' \
 ##  && wget -O Dockerfile --timeout=30 -t 5 "${GITHUB_URL}/Dockerfile" \
 ##  && wget -O entrypoint.sh --timeout=30 -t 5 "${GITHUB_URL}/entrypoint.sh" \
@@ -62,27 +63,29 @@ RUN echo "Begin" \
   && echo "********** 安装python包" \
   && speed="-i http://mirrors.aliyun.com/pypi/simple  --trusted-host mirrors.aliyun.com" \
   && pip install --no-cache-dir wheel ${speed} \
-##  && mkdir /whl && cd /whl && pip wheel pandas ${speed} \
-#   && pip install --no-cache-dir requests==2.25.1 ${speed} \
-#   && pip install --no-cache-dir Django==3.1.2 ${speed} \
-#   && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
-#   && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
-#   && pip install --no-cache-dir celery[redis]==5.0.1 ${speed} \
-#   && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
-#   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
-#   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-#   && pip install --no-cache-dir pandas==1.2.3 ${speed} \
-#   && pip install --no-cache-dir numpy==1.19.4 ${speed} \
-#   && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
-#   && pip install --no-cache-dir jieba==0.42.1 ${speed} \
-#   && pip install --no-cache-dir joblib==1.0.0 ${speed} \
-#   && pip install --no-cache-dir scipy==1.6.0 ${speed} \
-#   && pip install --no-cache-dir matplotlib ${speed} \
-  && pip install --no-cache-dir scikit-learn==0.24.1 ${speed} \ 
+  && pip install --no-cache-dir requests==2.25.1 ${speed} \
+  && pip install --no-cache-dir Django==3.1.2 ${speed} \
+  && pip install --no-cache-dir uwsgi==2.0.19.1 ${speed} \
+  && pip install --no-cache-dir uwsgitop==0.11 ${speed} \
+  && pip install --no-cache-dir celery[redis]==5.0.1 ${speed} \
+  && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
+  && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
+  && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
+  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
+  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
+  && echo "********** 下载whl并安装" \
+  && QINIU_URL='http://pubftp.qn.fplat.cn/alpine3.12/' \
+  && mkdir /whl && cd /whl \
+  && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+#  && pip install --no-cache-dir sklearn==0.0 ${speed} \
+#  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
-# && pip install --no-cache-dir sklearn ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
+  && rm -rf /whl \
   && echo "End"
 
 EXPOSE 8080-8089
