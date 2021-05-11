@@ -58,6 +58,7 @@ RUN echo "Begin" \
   && { [[ -e /usr/bin/python ]] || ln -sf /usr/bin/python3.8 /usr/bin/python; } \
   && python -m ensurepip \
   && python -m pip install --upgrade --no-cache-dir pip \
+  && { [[ -e /usr/bin/pip ]] || ln -sf /usr/bin/pip3 /usr/bin/pip; } \
   && cd /usr/bin \
   && ls -l python* pip* \
   && echo "********** 安装python包" \
@@ -71,17 +72,15 @@ RUN echo "Begin" \
   && pip install --no-cache-dir django-celery-results==2.0.1 ${speed} \
   && pip install --no-cache-dir django-celery-beat==2.2.0 ${speed} \
   && pip install --no-cache-dir mysqlclient==2.0.1 ${speed} \
-  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
-  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
   && echo "********** 下载whl并安装" \
   && QINIU_URL='http://pubftp.qn.fplat.cn/alpine3.12/' \
-#   && mkdir /whl && cd /whl \
-#   && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-#   && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-#   && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-#   && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-#  && pip install --no-cache-dir sklearn==0.0 ${speed} \
-#  && pip install --no-cache-dir pandas==1.2.3 ${speed} \
+  && mkdir /whl && cd /whl \
+  && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && pip install --no-cache-dir jieba==0.42.1 ${speed} \
+#  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
