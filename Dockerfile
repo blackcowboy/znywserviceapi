@@ -83,6 +83,8 @@ RUN echo "Begin" \
   && pip install --no-cache-dir jieba==0.42.1 ${speed} \
   && pip install --no-cache-dir jieba_fast==0.53 ${speed} \
   && pip install --no-cache-dir Jinja2==3.1.1 ${speed} \
+  && pip install --no-cache-dir flask==2.1.2 ${speed} \
+  && pip install --no-cache-dir sqlalchemy==1.4.36 ${speed} \
 #  && pip install --no-cache-dir elasticsearch==7.10.1 ${speed} \
 #  && pip install --no-cache-dir redis3==3.5.2.2 ${speed} \
   && echo "********** 删除依赖包" \
