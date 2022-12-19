@@ -78,7 +78,8 @@ RUN echo "Begin" \
   && mkdir /whl && cd /whl \
   && name="numpy-1.20.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
   && name="pandas-1.2.3-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
-  && pip install --no-cache-dir Jinja2==3.1.1 ${speed} \
+  && name="scipy-1.6.2-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
+  && name="scikit_learn-0.24.1-cp38-cp38-linux_x86_64.whl" && wget -O ${name} --timeout=600 -t 5 "${QINIU_URL}/${name}" && pip install --no-cache-dir ${name} \
   && echo "********** 删除依赖包" \
   && apk del .build-deps \
   && rm -rf /whl \
